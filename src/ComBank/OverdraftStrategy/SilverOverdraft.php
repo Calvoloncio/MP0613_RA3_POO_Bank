@@ -12,6 +12,22 @@
  * */
 class SilverOverdraft 
 {
+    protected float $overdraftFunds;
+
+    public function __construct(float $limite = 100.0)
+    {
+        $this->overdraftFunds = $limite;
+    }
+
+    public function getOverdraftFunds(): float
+    {
+        return $this->overdraftFunds;
+    }
+    public function isGrantOverdraftFunds(float $newAmount): bool
+    {
+        return false;
+    }    
 
     
+
 }

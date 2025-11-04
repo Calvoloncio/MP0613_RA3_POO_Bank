@@ -23,24 +23,25 @@ require_once 'bootstrap.php';
 pl('--------- [Start testing bank account #1, No overdraft] --------');
 try {
     // show balance account
-
+        $bankAccount1 = new BankAccount(400);
     // close account
-
+        $bankAccount1 -> closeAccount();
     // reopen account
-
+        $bankAccount1 -> reopenAccount();
 
     // deposit +150 
-    pl('Doing transaction deposit (+150) with current balance ' . $bankAccount1->getBalance());
-
+    pl(mixed: 'Doing transaction deposit (+150) with current balance ' . $bankAccount1->getBalance());
+    $bankAccount1->transaction(new DepositTransaction(150.0));
     pl('My new balance after deposit (+150) : ' . $bankAccount1->getBalance());
 
     // withdrawal -25
     pl('Doing transaction withdrawal (-25) with current balance ' . $bankAccount1->getBalance());
-
+    $bankAccount1->transaction(new WithdrawTransaction(25.0));
     pl('My new balance after withdrawal (-25) : ' . $bankAccount1->getBalance());
 
     // withdrawal -600
     pl('Doing transaction withdrawal (-600) with current balance ' . $bankAccount1->getBalance());
+    $bankAccount1->transaction(new WithdrawTransaction(600.0));
 
 } catch (ZeroAmountException $e) {
     pl($e->getMessage());
@@ -57,13 +58,21 @@ pl('My balance after failed last transaction : ' . $bankAccount1->getBalance());
 //---[Bank account 2]---/
 pl('--------- [Start testing bank account #2, Silver overdraft (100.0 funds)] --------');
 try {
+        $bankAccount2 = new BankAccount(100);
+    // close account
+        $bankAccount2 -> closeAccount();
+    // reopen account
+        $bankAccount2 -> reopenAccount();
     
     // show balance account
    
     // deposit +100
-    pl('Doing transaction deposit (+100) with current balance ' . $bankAccount2->getBalance());
-    
+    pl(mixed: 'Doing transaction deposit (+100) with current balance ' . $bankAccount2->getBalance());
+    $bankAccount2->transaction(new DepositTransaction(100.0));
+
     pl('My new balance after deposit (+100) : ' . $bankAccount2->getBalance());
+    // apply silver overdraft
+    
 
     // withdrawal -300
     pl('Doing transaction deposit (-300) with current balance ' . $bankAccount2->getBalance());

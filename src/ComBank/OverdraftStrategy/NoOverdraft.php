@@ -7,8 +7,12 @@
  * Time: 12:27 PM
  */
 
-class NoOverdraft 
+class NoOverdraft   
 {
-
+  
+    public function isGrantOverdraftFunds(float $newAmount): bool
+    {
+        return false;
+    }
    
 }
